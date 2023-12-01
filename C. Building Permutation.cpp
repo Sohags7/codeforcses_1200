@@ -177,34 +177,29 @@ ll mx_element(ll a[],ll l,ll r)
 
 void solve()
 {
-   
    ll n;
    cin>>n;
-    ll a[n+5];
-    ll sum=0;
-
-
-   map<ll,ll>mp;
-
-for(int i=1;i<=n;i++)
+   ll a[n+5]={0};
+   for(int i=1;i<=n;i++)cin>>a[i];
+    sort(a+1,a+n+1);
+  if(a[n]<0 || n==5)
   {
-    cin>>a[i];
-    ll x=log2(a[i])+1;
-    mp[x]++;
-
+    cout<<a[n]*a[n-1]*a[n-2]*a[n-3]*a[n-4]<<endl;
+    return;
   }
-  ll ans=0;
+  ll ans1=a[n]*a[n-1]*a[n-2]*a[n-3]*a[n-4];
+  ll ans2=a[1]*a[2]*a[n]*a[n-1]*a[n-2];
+  ll ans3=a[1]*a[2]*a[3]*a[4]*a[n];
 
-  for(auto x: mp)
-  {
-    ll v=x.second;
-    ans+=(v*(v-1))/2;
+  cout<<max({ans3,ans2,ans1})<<endl;
 
-  }
 
-  cout<<ans<<endl;
-  
- 
+
+
+
+
+
+
 
 
 }

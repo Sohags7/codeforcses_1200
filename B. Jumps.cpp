@@ -171,40 +171,49 @@ ll mx_element(ll a[],ll l,ll r)
   for(int i=l;i<r;i++)mx=max(a[i],mx);
   return mx;
 }
+bool check(ll a[],ll n,ll mid,ll k)
+{
+
+  ll health=0;
+  for(int i=2;i<=n;i++)
+  {health+=min(a[i]-a[i-1],mid);
+  }
+  health+=mid;
+
+  return health>=k;
+}
 
 
 
 
 void solve()
 {
+  ll n;
+  cin>>n;
+  ll i=1;
+  ll sum=1;
+
+  while(sum<n)
+  { i++;
+    sum+=i;
    
-   ll n;
-   cin>>n;
-    ll a[n+5];
-    ll sum=0;
-
-
-   map<ll,ll>mp;
-
-for(int i=1;i<=n;i++)
-  {
-    cin>>a[i];
-    ll x=log2(a[i])+1;
-    mp[x]++;
 
   }
-  ll ans=0;
+  ll ans=i;
 
-  for(auto x: mp)
-  {
-    ll v=x.second;
-    ans+=(v*(v-1))/2;
-
-  }
-
+if(sum==n)
+{
   cout<<ans<<endl;
-  
- 
+return;
+}
+if(sum-1==n)
+{
+  cout<<i+1<<endl;
+}
+else cout<<i<<endl;
+
+
+
 
 
 }

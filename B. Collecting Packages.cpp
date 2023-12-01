@@ -171,40 +171,63 @@ ll mx_element(ll a[],ll l,ll r)
   for(int i=l;i<r;i++)mx=max(a[i],mx);
   return mx;
 }
+bool check(ll a[],ll n,ll mid,ll k)
+{
+
+  ll health=0;
+  for(int i=2;i<=n;i++)
+  {health+=min(a[i]-a[i-1],mid);
+  }
+  health+=mid;
+
+  return health>=k;
+}
 
 
 
 
 void solve()
 {
-   
-   ll n;
-   cin>>n;
-    ll a[n+5];
-    ll sum=0;
+  ll n;
+  cin>>n;
+  vector<pair<ll,ll> > v;
 
-
-   map<ll,ll>mp;
-
-for(int i=1;i<=n;i++)
+  for(int i=1;i<=n;i++)
   {
-    cin>>a[i];
-    ll x=log2(a[i])+1;
-    mp[x]++;
-
+    ll x,y;
+    cin>>x>>y;
+    v.pb({x,y});
   }
-  ll ans=0;
+  sort(all(v));
 
-  for(auto x: mp)
+  for(int i=1;i<n;i++)
   {
-    ll v=x.second;
-    ans+=(v*(v-1))/2;
-
+    if(v[i-1].first>v[i].first || v[i-1].second>v[i].second)
+    {
+      cout<<"NO"<<endl;
+      return;
+    }
   }
 
-  cout<<ans<<endl;
-  
- 
+ vector<char > c;
+ll x=0;
+ll y=0;
+
+for(auto it: v)
+{
+  ll a=it.first;
+  ll b=it.second;
+  while(x<a)c.pb('R'),x++;
+  while(y<b)c.pb('U'),y++;
+
+}
+cout<<"YES"<<endl;
+for(auto x: c)
+{
+  cout<<x;
+}
+cout<<endl;
+
 
 
 }
