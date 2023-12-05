@@ -177,49 +177,44 @@ ll mx_element(ll a[],ll l,ll r)
 
 void solve()
 {
+ 
+ ll n;
+ cin>>n;
 
-ll n;
-cin>>n;
-
+ map<ll,ll>mp;
 ll a[n+5];
-ll sum=0;
-ll c=0;
 
-ll one=0;
+ for(int i=1;i<=n;i++)cin>>a[i];
 
 
-for(int i=1;i<=n;i++)
+  
+  for(int k=1;k<=n;k++)
   {
-    cin>>a[i];
-    sum+=a[i];
-    one+=(a[i]==1 && i>1 && i<n );
-    if(i>1 && i<n && a[i]%2==1)c++;
+    ll val=a[k];
+    mp[val]++;
+    while(k<=n && val==a[k])k++;
+    k--;
+  }
+  ll ans=n;
+
+
+ 
+
+  for(auto x: mp)
+  {
+    ll val=x.second;
+    if(x.first==a[1] && x.first==a[n])ans=min(ans,val-1);
+      else if(x.first==a[1] || x.first==a[n])ans=min(ans,val);
+      else ans=min(ans,val+1);
+   
 
   }
-  sum-=a[1];
-  sum-=a[n];
-  
-  if(n==3 )
-  {
-    if(a[2]%2==0)
-    {
-      cout<<a[2]/2<<endl;
-      return;
-    }
-    else cout<<-1<<endl;
-    return;
-
-    return;
-  }
-  if(one==n-2)
-    {
-      cout<<-1<<endl;
-      return;
+  cout<<ans<<endl;
 
 
-    }
-  
-cout<<sum/2+(c+1)/2<<endl;
+
+ 
+
 
 
 

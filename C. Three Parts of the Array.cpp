@@ -177,53 +177,44 @@ ll mx_element(ll a[],ll l,ll r)
 
 void solve()
 {
-
-ll n;
-cin>>n;
+  ll n;
+  cin>>n;
 
 ll a[n+5];
-ll sum=0;
-ll c=0;
 
-ll one=0;
+  for(int i=1;i<=n;i++)cin>>a[i];
+    ll l=1;
+  ll r=n;
 
+  ll ans=0;
+  ll s1=0;
+  ll s3=0;
 
-for(int i=1;i<=n;i++)
+  while(l<=r)
   {
-    cin>>a[i];
-    sum+=a[i];
-    one+=(a[i]==1 && i>1 && i<n );
-    if(i>1 && i<n && a[i]%2==1)c++;
-
-  }
-  sum-=a[1];
-  sum-=a[n];
-  
-  if(n==3 )
-  {
-    if(a[2]%2==0)
+    if(s1<s3)
     {
-      cout<<a[2]/2<<endl;
-      return;
-    }
-    else cout<<-1<<endl;
-    return;
-
-    return;
-  }
-  if(one==n-2)
-    {
-      cout<<-1<<endl;
-      return;
-
+      s1+=a[l];
+      l++;
 
     }
+    else 
+    {
+      s3+=a[r];
+      r--;
+    }
+    if(s1==s3)
+    {
+      ans=max(ans,s1);
+    }
+
+  }
+
+  cout<<ans<<endl;
+
+
+
   
-cout<<sum/2+(c+1)/2<<endl;
-
-
-
-
 }
 
 int main ()
@@ -237,7 +228,7 @@ freopen ("out.txt","w", stdout);
   cin.tie(NULL); 
 
   
-int t;cin>>t;for(ll i=1;i<=t;i++)
+//int t;cin>>t;for(ll i=1;i<=t;i++)
 solve();
 
 return 0;

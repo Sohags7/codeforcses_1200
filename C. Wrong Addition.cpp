@@ -177,52 +177,65 @@ ll mx_element(ll a[],ll l,ll r)
 
 void solve()
 {
+   string a,b,s;
+   cin>>a>>s;
 
-ll n;
-cin>>n;
+     int i=s.size()-1;
+     int j=a.size()-1;
+     b="";
 
-ll a[n+5];
-ll sum=0;
-ll c=0;
+     while(i>=0 && j>=0)
+     {
+      ll digit_a=a[j]-48;
+      ll digit_s=s[i]-48;
+      if(i<j)
+      {
+        cout<<-1<<endl;
+        return;
 
-ll one=0;
+      }
+        if(digit_a<digit_s)
+        {
+          b+=((digit_s-digit_a)+48);
+          i--;
+          j--;
+
+        }
+        else if(digit_a>digit_s)
+        {
+          i--;
+          digit_s=(s[i]-48)*10+digit_s;
+          if(digit_s-digit_a>=10 ||digit_s-digit_a<0) {cout<<"-1"<<endl;return ;}
+
+          b+=((digit_s-digit_a)+48);
+          i--;
+          j--;
+        }
+        else
+        {
+          b+='0';
+          i--;j--;
+        }
+        if(i<0 || j<0)break;
+
+     }
+     ///dbg(i,j);
+
+     while(i>=0)b+=s[i],i--;
+
+     reverse(all(b));
+    
+   
+  ll x=stoll(b);
 
 
-for(int i=1;i<=n;i++)
-  {
-    cin>>a[i];
-    sum+=a[i];
-    one+=(a[i]==1 && i>1 && i<n );
-    if(i>1 && i<n && a[i]%2==1)c++;
-
-  }
-  sum-=a[1];
-  sum-=a[n];
-  
-  if(n==3 )
-  {
-    if(a[2]%2==0)
-    {
-      cout<<a[2]/2<<endl;
-      return;
-    }
-    else cout<<-1<<endl;
-    return;
-
-    return;
-  }
-  if(one==n-2)
-    {
-      cout<<-1<<endl;
-      return;
-
-
-    }
-  
-cout<<sum/2+(c+1)/2<<endl;
+cout<<x<<endl;
 
 
 
+
+ 
+ 
 
 }
 

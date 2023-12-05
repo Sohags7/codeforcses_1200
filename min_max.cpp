@@ -171,58 +171,58 @@ ll mx_element(ll a[],ll l,ll r)
   for(int i=l;i<r;i++)mx=max(a[i],mx);
   return mx;
 }
+bool check(ll a[],ll n,ll mid,ll k)
+{
+
+  ll health=0;
+  for(int i=2;i<=n;i++)
+  {health+=min(a[i]-a[i-1],mid);
+  }
+  health+=mid;
+
+  return health>=k;
+}
+
+ll a[1000][1000];
+ll n,m;
+ll dp[1000][1000];
+
+
+ll max_dis(ll x,ll y)
+{
+  
+  if(x==n && y==m) return a[x][y];
+  if(dp[x][y]!=-1)return dp[x][y];
+
+
+  ll ans=0;
+
+  ll ans1=0;
+  if(x+1<=n)
+  ans=a[x][y]+max_dis(x+1,y);
+
+if(y+1<=m) ans1=a[x][y]+max_dis(x,y+1);
+
+
+  return dp[x][y]=max(ans1,ans);
+}
 
 
 
 
 void solve()
 {
-
-ll n;
-cin>>n;
-
-ll a[n+5];
-ll sum=0;
-ll c=0;
-
-ll one=0;
-
-
-for(int i=1;i<=n;i++)
+  
+  
+  cin>>n>>m;
+  for(int i=1;i<=n;i++)
   {
-    cin>>a[i];
-    sum+=a[i];
-    one+=(a[i]==1 && i>1 && i<n );
-    if(i>1 && i<n && a[i]%2==1)c++;
+    for(int j=1;j<=m;j++)cin>>a[i][j];
 
   }
-  sum-=a[1];
-  sum-=a[n];
-  
-  if(n==3 )
-  {
-    if(a[2]%2==0)
-    {
-      cout<<a[2]/2<<endl;
-      return;
-    }
-    else cout<<-1<<endl;
-    return;
+memset(dp,-1,sizeof(dp));
 
-    return;
-  }
-  if(one==n-2)
-    {
-      cout<<-1<<endl;
-      return;
-
-
-    }
-  
-cout<<sum/2+(c+1)/2<<endl;
-
-
-
+cout<<max_dis(1,1)<<endl;
 
 }
 
@@ -237,7 +237,7 @@ freopen ("out.txt","w", stdout);
   cin.tie(NULL); 
 
   
-int t;cin>>t;for(ll i=1;i<=t;i++)
+//int t;cin>>t;for(ll i=1;i<=t;i++)
 solve();
 
 return 0;
